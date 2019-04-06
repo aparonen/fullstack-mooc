@@ -1,0 +1,18 @@
+title 0.6: Uusi muistiinpano (SPA)
+
+note over selain:
+Selain suorittaa tapahtumankäsittelijän joka lisää
+muistiinpanon notes-taulukkoon ja renderöi
+muistiinpanot uudelleen tämän taulukon pohjalta.
+Tämän lisäksi se lähettää uuden muistiinpanon
+palvelimelle POSTin hyötykuormana.
+end note
+
+selain->palvelin: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+
+note over palvelin:
+Palvelin lisää POSTin sisältämän
+datan tietokantaan.
+end note
+
+palvelin-->selain: HTTP 201
