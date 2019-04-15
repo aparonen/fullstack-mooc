@@ -1,12 +1,8 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 
-const Feedback = ({handlers}) => (
-    <div>
-        <button onClick={handlers.good}>Hyvä</button>
-        <button onClick={handlers.neutral}>Neutraali</button>
-        <button onClick={handlers.bad}>Huono</button>
-    </div>
+const Button = ({handleClick, text}) => (
+    <button onClick={handleClick}>{text}</button>
 )
 
 const Statistics = ({reviews: {good, neutral, bad}}) => {
@@ -18,15 +14,23 @@ const Statistics = ({reviews: {good, neutral, bad}}) => {
 
     return (
         <div>
-            <p>Hyvä: {good}</p>
-            <p>Neutraali: {neutral}</p>
-            <p>Huono: {bad}</p>
-            <p>Yhteensä: {total}</p>
-            <p>Keskiarvo: {(good - bad) / total}</p>
-            <p>Positiivisia: {(good / total) * 100} %</p>
+            <Statistic text="Hyvä" value={good} />
+            <Statistic text="Neutraali" value={neutral} />
+            <Statistic text="Huono" value={bad} />
+            <Statistic text="Yhteensä" value={total} />
+            <Statistic text="Keskiarvo" value={(good - bad) / total} />
+            <Statistic
+                text="Positiivisia"
+                value={(good / total) * 100}
+                unit="%"
+            />
         </div>
     )
 }
+
+const Statistic = ({text, value, unit}) => (
+    <p>{text}: {value} {unit}</p>
+)
 
 const App = () => {
     const [good, setGood] = useState(0)
@@ -42,16 +46,13 @@ const App = () => {
         neutral: neutral,
         bad: bad,
     }
-    const handlers = {
-        good: handleGood,
-        neutral: handleNeutral,
-        bad: handleBad,
-    }
 
     return (
         <div>
             <h1>Anna palautetta</h1>
-            <Feedback handlers={handlers} />
+            <Button handleClick={handleGood} text="Hyvä" />
+            <Button handleClick={handleNeutral} text="Neutraali" />
+            <Button handleClick={handleBad} text="Huono" />
             <h1>Statistiikka</h1>
             <Statistics reviews={reviews} />
         </div>
