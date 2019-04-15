@@ -4,9 +4,8 @@ import ReactDOM from 'react-dom';
 const App = (props) => {
     const [selected, setSelected] = useState(0)
 
-    const handleClick = () => {
-        setSelected(1)
-    }
+    const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max))
+    const handleClick = () => setSelected(getRandomInt(anecdotes.length))
 
     return (
         <div>
