@@ -10,14 +10,20 @@ const Feedback = ({handlers}) => (
     </div>
 )
 
-const Statistics = ({reviews}) => (
-    <div>
-        <h1>Statistiikka</h1>
-        <p>Hyvä: {reviews.good}</p>
-        <p>Neutraali: {reviews.neutral}</p>
-        <p>Huono: {reviews.bad}</p>
-    </div>
-)
+const Statistics = ({reviews: {good, neutral, bad}}) => {
+    const total = good + neutral + bad
+    return (
+        <div>
+            <h1>Statistiikka</h1>
+            <p>Hyvä: {good}</p>
+            <p>Neutraali: {neutral}</p>
+            <p>Huono: {bad}</p>
+            <p>Yhteensä: {total}</p>
+            <p>Keskiarvo: {(good - bad) / total}</p>
+            <p>Positiivisia: {(good / total) * 100} %</p>
+        </div>
+    )
+}
 
 const App = () => {
     const [good, setGood] = useState(0)
