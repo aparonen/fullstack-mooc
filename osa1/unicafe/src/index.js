@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 const Feedback = ({handlers}) => (
     <div>
-        <h1>Anna palautetta</h1>
         <button onClick={handlers.good}>Hyvä</button>
         <button onClick={handlers.neutral}>Neutraali</button>
         <button onClick={handlers.bad}>Huono</button>
@@ -12,9 +11,13 @@ const Feedback = ({handlers}) => (
 
 const Statistics = ({reviews: {good, neutral, bad}}) => {
     const total = good + neutral + bad
+
+    if (total <= 0) {
+        return <p>Ei yhtään palautetta annettu.</p>
+    }
+
     return (
         <div>
-            <h1>Statistiikka</h1>
             <p>Hyvä: {good}</p>
             <p>Neutraali: {neutral}</p>
             <p>Huono: {bad}</p>
@@ -47,7 +50,9 @@ const App = () => {
 
     return (
         <div>
+            <h1>Anna palautetta</h1>
             <Feedback handlers={handlers} />
+            <h1>Statistiikka</h1>
             <Statistics reviews={reviews} />
         </div>
     )
