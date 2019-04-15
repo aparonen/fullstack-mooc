@@ -13,23 +13,28 @@ const Statistics = ({reviews: {good, neutral, bad}}) => {
     }
 
     return (
-        <div>
-            <Statistic text="Hyvä" value={good} />
-            <Statistic text="Neutraali" value={neutral} />
-            <Statistic text="Huono" value={bad} />
-            <Statistic text="Yhteensä" value={total} />
-            <Statistic text="Keskiarvo" value={(good - bad) / total} />
-            <Statistic
-                text="Positiivisia"
-                value={(good / total) * 100}
-                unit="%"
-            />
-        </div>
+        <table>
+            <tbody>
+                <Statistic text="Hyvä" value={good} />
+                <Statistic text="Neutraali" value={neutral} />
+                <Statistic text="Huono" value={bad} />
+                <Statistic text="Yhteensä" value={total} />
+                <Statistic text="Keskiarvo" value={(good - bad) / total} />
+                <Statistic
+                    text="Positiivisia"
+                    value={(good / total) * 100}
+                    unit="%"
+                />
+            </tbody>
+        </table>
     )
 }
 
 const Statistic = ({text, value, unit}) => (
-    <p>{text}: {value} {unit}</p>
+    <tr>
+        <td>{text}</td>
+        <td>{value} {unit}</td>
+    </tr>
 )
 
 const App = () => {
