@@ -8,22 +8,9 @@ const Anecdote = (props) => (
     </div>
 )
 
-const App = (props) => {
+const App = () => {
     const [selected, setSelected] = useState(0)
     const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
-
-    const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max))
-    const getIndexOfLargest = (arr) => {
-        let largest = 0
-        let indexOfLargest = 0
-        for (const [index, element] of arr.entries()) {
-            if (element > largest) {
-                largest = element
-                indexOfLargest = index
-            }
-        }
-        return indexOfLargest
-    }
 
     const handleNext = () => setSelected(getRandomInt(anecdotes.length))
     const handleVote = () => {
@@ -38,14 +25,14 @@ const App = (props) => {
         <div>
             <h1>Anecdote of the day</h1>
             <Anecdote
-                anecdote={props.anecdotes[selected]}
+                anecdote={anecdotes[selected]}
                 voteCount={votes[selected]}
             />
             <button onClick={handleVote}>Vote</button>
             <button onClick={handleNext}>Next anecdote</button>
             <h1>Anecdote with most votes</h1>
             <Anecdote
-                anecdote={props.anecdotes[mostVoted]}
+                anecdote={anecdotes[mostVoted]}
                 voteCount={votes[mostVoted]}
             />
         </div>
@@ -60,6 +47,20 @@ const anecdotes = [
     'Premature optimization is the root of all evil.',
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
 ]
+
+// Helper functions.
+const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max))
+const getIndexOfLargest = (arr) => {
+    let largest = 0
+    let indexOfLargest = 0
+    for (const [index, element] of arr.entries()) {
+        if (element > largest) {
+            largest = element
+            indexOfLargest = index
+        }
+    }
+    return indexOfLargest
+}
 
 ReactDOM.render(
     <App anecdotes={anecdotes} />,
